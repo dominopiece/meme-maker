@@ -22,7 +22,7 @@ canvas.height = 800;
 // // ctx.stroke();
 // ctx.fill()
 
-// // human 
+// // human
 // ctx.fillRect(210, 200, 15, 100);
 // // ctx.fillRect(210 - 10, 200  - 10, 15, 100);
 // ctx.fillRect(350, 200, 15, 100);
@@ -37,3 +37,33 @@ canvas.height = 800;
 // ctx.arc(310, 150, 5, 1 * Math.PI, 2 * Math.PI);
 // ctx.arc(290, 150, 10, 2 * Math.PI, 1 * Math.PI);
 // ctx.fill();
+
+
+// #Painting board
+ctx.lineWidth = 2;
+
+const colors = [
+  "#8e44ad",
+  "#e74c3c",
+  "#e67e22",
+  "#e67e22",
+  "#e74c3c",
+  "#f1c40f",
+  "#f1c40f",
+  "#27ae60",
+  "#9b59b6",
+];
+
+// FIXME: moveTo 없을 시  처음 클릭하면 선이 그러지지 않음.
+const onClick = (event) => {
+  // 각각의 색 변경
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  // Math.floor 소수점 이하 반올림
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  ctx.strokeStyle = color;
+  ctx.lineTo(event.offsetX, event.offsetY);
+  ctx.stroke();
+};
+
+canvas.addEventListener("mousemove", onClick);
