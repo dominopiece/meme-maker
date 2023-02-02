@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
+ctx.lineWidth = 2;
 
 // ctx.moveTo(50, 50);
 // ctx.lineTo(150, 50);
@@ -38,32 +39,63 @@ canvas.height = 800;
 // ctx.arc(290, 150, 10, 2 * Math.PI, 1 * Math.PI);
 // ctx.fill();
 
+// // #Painting board
+// ctx.lineWidth = 2;
 
-// #Painting board
-ctx.lineWidth = 2;
+// const colors = [
+//   "#8e44ad",
+//   "#e74c3c",
+//   "#e67e22",
+//   "#e67e22",
+//   "#e74c3c",
+//   "#f1c40f",
+//   "#f1c40f",
+//   "#27ae60",
+//   "#9b59b6",
+// ];
 
-const colors = [
-  "#8e44ad",
-  "#e74c3c",
-  "#e67e22",
-  "#e67e22",
-  "#e74c3c",
-  "#f1c40f",
-  "#f1c40f",
-  "#27ae60",
-  "#9b59b6",
-];
+// // FIXME: moveTo 없을 시  처음 클릭하면 선이 그러지지 않음.
+// const onClick = (event) => {
+//   // 각각의 색 변경
+//   ctx.beginPath();
+//   ctx.moveTo(0, 0);
+//   // Math.floor 소수점 이하 반올림
+//   const color = colors[Math.floor(Math.random() * colors.length)];
+//   ctx.strokeStyle = color;
+//   ctx.lineTo(event.offsetX, event.offsetY);
+//   ctx.stroke();
+// };
 
-// FIXME: moveTo 없을 시  처음 클릭하면 선이 그러지지 않음.
-const onClick = (event) => {
-  // 각각의 색 변경
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  // Math.floor 소수점 이하 반올림
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  ctx.strokeStyle = color;
-  ctx.lineTo(event.offsetX, event.offsetY);
-  ctx.stroke();
+// canvas.addEventListener("mousemove", onClick);
+
+// # Mouse Painting
+
+// 값이 변하는 변수
+let isPainting = false;
+
+const onMove = (event) => {
+  if (isPainting) {
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
+    return;
+  }
+  ctx.moveTo(event.offsetX, event.offsetY);
 };
 
-canvas.addEventListener("mousemove", onClick);
+const onMouseDown = (event) => {
+  // 마우스 다운시 true로 변경
+  isPainting = true;
+};
+
+const onMouseUp = (event) => {
+  // 마우스 업 시 flase
+  isPainting = false;
+};
+
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", onMouseDown);
+canvas.addEventListener("mouseup", onMouseUp);
+// 마우스 다운 중 캔버스 나갈 시 마우스 업 상태에서도 마우스 다운으로 인지
+canvas.addEventListener("mouseleave", onMouseUp);
+// or
+document.addEventListener("mouseup", onMouseUp);
