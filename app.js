@@ -171,10 +171,77 @@ ctx.lineWidth = 5;
 // // # 클로저(Closure)
 // 어휘적 환경(Lexical Environmnet)
 
-let one;
-one = 1;
+// let one;
+// one = 1;
 
-const addOne = (num) => {
-    console.log(one + num);
+// const addOne = (num) => {
+//     console.log(one + num);
+// }
+// addOne(5)
+
+// // // 어휘적 환경(Lexical Environment)
+// // // Closure 함수와 렉시컬 환경의 조합
+// const makeAdder = (x) => {
+//     return function(y){
+//         return x + y
+//     }
+// }
+
+// const add3 = makeAdder(3);
+// console.log(add3(2));   // 5
+
+// const add10 = makeAdder(10);
+// console.log(add10(5));  // 15
+// console.log(add3(1))    // 4
+
+// const makeCounter = () => {
+//     let num = 0;        // 은닉화
+
+//     return function() {
+//         return num++;
+//     }
+// }
+
+// let counter = makeCounter();
+
+// console.log(counter());     // 0
+// console.log(counter());     // 1
+// console.log(counter());     // 2
+
+// // # setTimeout / setInterval
+// // setTimeout: 일정 시간이 지난 후 함수를 실행
+// // setInterval 일정 시간 간격으로 함수를 반복
+// // clearInterval(tId)
+// let num = 0;
+
+// const showTime = () => {
+//   console.log(`Time sec: ${num++}sec.`);
+//   if(num > 5) {
+//   clearInterval(tid)
+//   }
+// };
+
+// const tid = setInterval(showTime, 1000);
+
+// // call, apply, bind: 함수 호출 방식과 관계없이 this를 지정할 수 있음
+const mike = {
+  name: "Mike",
+  age:30
+};
+
+const tom = {
+  name: "Tom",
+};
+// 화살표 함수 안되는 것 같음
+const showThisNa = (name) => console.log(name);
+
+function showThisNaFunc(){
+  console.log(this.name);
+  console.log(this.age);
 }
-addOne(5)
+
+showThisNa(mike);
+
+showThisNaFunc(mike);       // empty string(window)
+showThisNaFunc.call(mike);
+
