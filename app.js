@@ -2,7 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
-ctx.lineWidth = 2;
+ctx.lineWidth = 5;
 
 // ctx.moveTo(50, 50);
 // ctx.lineTo(150, 50);
@@ -68,34 +68,113 @@ ctx.lineWidth = 2;
 
 // canvas.addEventListener("mousemove", onClick);
 
-// # Mouse Painting
+// // # Mouse Painting
 
-// 값이 변하는 변수
-let isPainting = false;
+// // 값이 변하는 변수
+// let isPainting = false;
 
-const onMove = (event) => {
-  if (isPainting) {
-    ctx.lineTo(event.offsetX, event.offsetY);
-    ctx.stroke();
-    return;
-  }
-  ctx.moveTo(event.offsetX, event.offsetY);
-};
+// const onMove = (event) => {
+//   if (isPainting) {
+//     ctx.lineTo(event.offsetX, event.offsetY);
+//     ctx.stroke();
+//     return;
+//   }
+//   ctx.moveTo(event.offsetX, event.offsetY);
+// };
 
-const onMouseDown = (event) => {
-  // 마우스 다운시 true로 변경
-  isPainting = true;
-};
+// const onMouseDown = (event) => {
+//   // 마우스 다운시 true로 변경
+//   isPainting = true;
+// };
 
-const onMouseUp = (event) => {
-  // 마우스 업 시 flase
-  isPainting = false;
-};
+// const onMouseUp = (event) => {
+//   // 마우스 업 시 flase
+//   isPainting = false;
+// };
 
-canvas.addEventListener("mousemove", onMove);
-canvas.addEventListener("mousedown", onMouseDown);
-canvas.addEventListener("mouseup", onMouseUp);
-// 마우스 다운 중 캔버스 나갈 시 마우스 업 상태에서도 마우스 다운으로 인지
-canvas.addEventListener("mouseleave", onMouseUp);
-// or
-document.addEventListener("mouseup", onMouseUp);
+// canvas.addEventListener("mousemove", onMove);
+// canvas.addEventListener("mousedown", onMouseDown);
+// canvas.addEventListener("mouseup", onMouseUp);
+// // 마우스 다운 중 캔버스 나갈 시 마우스 업 상태에서도 마우스 다운으로 인지
+// canvas.addEventListener("mouseleave", onMouseUp);
+// // or
+// document.addEventListener("mouseup", onMouseUp);
+
+// // 생성자 함수는 화살표 함수 쓸 수 없음.
+// const User = (name, age, ...skills) => {
+//     name = name
+//     age = age
+//     skills = skills
+// }
+
+// function User1(name, age, ...skills){
+//     this.name = name
+//     this.age = age
+//     this.skills = skills
+// }
+// // const user = new User("Mike", 30, "html", "javascript");
+// // console.log(user)
+// const user1 = new User1("Mike", 30, "html", "javascript");
+// console.log(user1)
+
+// // 전개 구문(Spread syntax): 배열
+// const arr1 = [1, 2, 3];
+// const arr2 = [4, 5, 6];
+
+// const result = [...arr1, ...arr2];
+// console.log(result);
+
+// // 전개 구문(Spread syntax): 복제
+// const arr = [1, 2, 3];
+// const arr1 = [...arr];
+// console.log(arr1);
+
+// const user = { name: "Mike", age: 30 };
+// const user1 = { ...user };
+// console.log(user1);
+
+// user1.name = "Tom";
+// console.log(user);
+// console.log(user1);
+
+// /// arr2 = [4, 5, 6, 1, 2, 3]
+// let arr2 = [1, 2, 3];
+// const arr3 = [4, 5, 6];
+
+// arr2 = [...arr3, ...arr2];
+// console.log(arr2)
+
+// let user = { name: "Mike" };
+// const info = { age: 20 };
+// const fe = ["JS", "React"];
+// const lang = ["Korean", "English"];
+
+// // // 전개구문 안쓸 떄
+// // user = Object.assign({}, user, info, { skills: [] });
+
+// // fe.forEach((item) => {
+// //   user.skills.push(item);
+// // });
+// // lang.forEach((item) => {
+// //   user.skills.push(item);
+// // });
+
+// // 전개구문
+// user = {
+//   ...user,
+//   ...info,
+//   skills: [...fe, ...lang],
+// };
+
+// console.log(user);
+
+// // # 클로저(Closure)
+// 어휘적 환경(Lexical Environmnet)
+
+let one;
+one = 1;
+
+const addOne = (num) => {
+    console.log(one + num);
+}
+addOne(5)
