@@ -365,33 +365,94 @@ ctx.lineWidth = 5;
 // console.log(x5.wheels);
 // x5.drive();
 
-const car = {
-  wheels: 4,
-  drive() {
-    console.log("drive..");
-  },
+// const car = {
+//   wheels: 4,
+//   drive() {
+//     console.log("drive..");
+//   },
+// };
+
+// const Bmw = function (color) {
+//   this.color = color;
+// };
+
+// // car 대신
+// Bmw.prototype.wheels = 4;
+// Bmw.prototype.drive = function () {
+//   console.log("drive..")
+// }
+
+// const benz = new Bmw("red");
+// const audi = new Bmw("blue");
+
+// // // 생성자 함수.prototype를 하였므로 필요 없음.
+// // benz.__proto__ = car;
+// // audi.__proto__ = car;
+
+// console.log(benz.wheels);
+
+// // // # instanceof
+
+// console.log(audi instanceof Bmw);
+// console.log(audi instanceof car);
+
+// // # Class 생성자 함수는 클래스로 만드는게 버그 발생률을 줄일 수 있음.
+const User = function (name, age) {
+  (this.name = name),
+    (this.age = age),
+    (this.showName = function () {
+      console.log(this.name);
+    });
+  this.showAge = function () {
+    console.log(this.age);
+  };
 };
 
-const Bmw = function (color) {
-  this.color = color;
-};
+const mike = new User("Mike", 30);
 
-// car 대신 
-Bmw.prototype.wheels = 4;
-Bmw.prototype.drive = function () {
-  console.log("drive..")
+class User2 {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  showName() {
+    console.log(this.name);
+  }
 }
 
-const benz = new Bmw("red");
+const tom = new User2("Tom", 20);
+console.log(tom);
+
+// // # 클래스 상속 extends
+
+class Car {
+  constructor(color) {
+    this.color = color;
+    this.wheels = 4;
+  }
+  drive() {
+    console.log("dirve..");
+  }
+  stop() {
+    console.log("Stop");
+  }
+}
+
+// class Bmw extends Car {
+//   park() {
+//     console.log("Park");
+//   }
+// }
+
 const audi = new Bmw("blue");
+console.log(audi);
 
-// // 생성자 함수.prototype를 하였므로 필요 없음.
-// benz.__proto__ = car;
-// audi.__proto__ = car;
 
-console.log(benz.wheels);
-
-// // # instanceof
-
-console.log(audi instanceof Bmw);
-console.log(audi instanceof car);
+// # 메소드 오버라이딩 method overriding
+// # super 부모 클래스 매서드 사용할 수 있음.
+class Bmw extends Car {
+  park() {
+    console.log("stop");
+  }
+}
+console.log(audi);
