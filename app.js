@@ -224,24 +224,70 @@ ctx.lineWidth = 5;
 // const tid = setInterval(showTime, 1000);
 
 // // call, apply, bind: 함수 호출 방식과 관계없이 this를 지정할 수 있음
-const mike = {
-  name: "Mike",
-  age:30
-};
+// const mike = {
+//   name: "Mike",
+//   age: 30,
+// };
 
-const tom = {
-  name: "Tom",
-};
-// 화살표 함수 안되는 것 같음
-const showThisNa = (name) => console.log(name);
+// const tom = {
+//   name: "Tom",
+// };
+// // 화살표 함수 안되는 것 같음
+// const showThisNa = (name) => console.log(name);
 
-function showThisNaFunc(){
-  console.log(this.name);
-  console.log(this.age);
-}
+// function showThisNaFunc() {
+//   console.log(this.name);
+//   console.log(this.age);
+// }
 
-showThisNa(mike);
+// showThisNa(mike);
 
-showThisNaFunc(mike);       // empty string(window)
-showThisNaFunc.call(mike);
+// showThisNaFunc(mike); // empty string(window)
+// showThisNaFunc.call(mike);
 
+// // 객체 업데이트 # call
+// function update(birthYear, occupation) {
+//   this.birthYear = birthYear;
+//   this.occupation = occupation;
+// }
+
+// update.call(mike, 2001, "programmer");
+// console.log(mike);
+
+// // # apply 매개변수(parameter)를 배열로 받음
+// // 결과 값은 call과 같음.
+// // spread 연산자 최고
+// update.apply(mike, [2001, "programmer"]);
+// console.log(mike);
+
+// // // # bind: 함수의 this 값을 영구히 바꿀 수 있음.
+// const updateMike = update.bind(mike);
+// updateMike(2003, "lower");
+// console.log(mike);
+
+// updateMike(2004, "pm");
+// console.log(mike);
+
+// // bind ex)
+// const user = {
+//   name: "Mike",
+//   age: 10,
+//   showName: function () {
+//     console.log(`hello, ${this.name}`);
+//   },
+//   showAge: function () {
+//     console.log(`${this.name} is ${this.age} years old.`);
+//   },
+// };
+
+// user.showName(); // hello, Mike
+// user.showAge(); // Mike is 10 years old.
+
+// let fnName = user.showName;
+// let fnAge = user.showAge;
+
+// fnName(); // hello,
+// fnAge(); //  is undefined years old.
+
+// let boundFn = fnName.bind(user);
+// boundFn();
