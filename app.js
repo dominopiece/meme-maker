@@ -291,3 +291,107 @@ ctx.lineWidth = 5;
 
 // let boundFn = fnName.bind(user);
 // boundFn();
+
+// // # 상속, prototype
+// // .hasOwnProperty('?');
+// const user = {
+//   name: "Mike",
+// };
+// console.log(user.name);
+// console.log(user.hasOwnProperty("name"));
+
+// // wheels, drive() 공통
+// const bmw = {
+//   color: "red",
+//   wheels: 4,
+//   navigation: 1,
+//   drive() {
+//     console.log("drive..");
+//   },
+// };
+
+// const benz = {
+//   color: "black",
+//   wheels: 4,
+//   drive() {
+//     console.log("drive..");
+//   },
+// };
+
+// const audi = {
+//   color: "blue",
+//   wheels: 4,
+//   drive() {
+//     console.log("drive..");
+//   },
+// };
+
+// // # __proto__
+// const car = {
+//   wheels: 4,
+//   drive() {
+//     console.log("drive..");
+//   },
+// };
+
+// const bmw = {
+//   color: "red",
+//   navigation: 1,
+// };
+
+// const benz = {
+//   color: "black",
+// };
+
+// const audi = {
+//   color: "blue",
+// };
+
+// bmw.__proto__ = car;
+// benz.__proto__ = car;
+// audi.__proto__ = car;
+// // console.log(bmw);
+// console.log(bmw.wheels);
+// bmw.drive();
+
+// // // # Prototype Chain
+
+// const x5 = {
+//   name: "x5",
+//   color: "yello",
+// };
+// // 상속 받은 bmw에 없을 시 bwm가 상속 받은 car에서 찾는다. Prototype Chain
+// x5.__proto__ = bmw;
+// console.log(x5.wheels);
+// x5.drive();
+
+const car = {
+  wheels: 4,
+  drive() {
+    console.log("drive..");
+  },
+};
+
+const Bmw = function (color) {
+  this.color = color;
+};
+
+// car 대신 
+Bmw.prototype.wheels = 4;
+Bmw.prototype.drive = function () {
+  console.log("drive..")
+}
+
+const benz = new Bmw("red");
+const audi = new Bmw("blue");
+
+// // 생성자 함수.prototype를 하였므로 필요 없음.
+// benz.__proto__ = car;
+// audi.__proto__ = car;
+
+console.log(benz.wheels);
+
+// // # instanceof
+
+console.log(audi instanceof Bmw);
+console.log(audi instanceof car);
