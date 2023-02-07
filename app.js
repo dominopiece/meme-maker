@@ -397,62 +397,100 @@ ctx.lineWidth = 5;
 // console.log(audi instanceof car);
 
 // // # Class 생성자 함수는 클래스로 만드는게 버그 발생률을 줄일 수 있음.
-const User = function (name, age) {
-  (this.name = name),
-    (this.age = age),
-    (this.showName = function () {
-      console.log(this.name);
-    });
-  this.showAge = function () {
-    console.log(this.age);
-  };
-};
+// const User = function (name, age) {
+//   (this.name = name),
+//     (this.age = age),
+//     (this.showName = function () {
+//       console.log(this.name);
+//     });
+//   this.showAge = function () {
+//     console.log(this.age);
+//   };
+// };
 
-const mike = new User("Mike", 30);
+// const mike = new User("Mike", 30);
 
-class User2 {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  showName() {
-    console.log(this.name);
-  }
-}
-
-const tom = new User2("Tom", 20);
-console.log(tom);
-
-// // # 클래스 상속 extends
-
-class Car {
-  constructor(color) {
-    this.color = color;
-    this.wheels = 4;
-  }
-  drive() {
-    console.log("dirve..");
-  }
-  stop() {
-    console.log("Stop");
-  }
-}
-
-// class Bmw extends Car {
-//   park() {
-//     console.log("Park");
+// class User2 {
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+//   showName() {
+//     console.log(this.name);
 //   }
 // }
 
-const audi = new Bmw("blue");
-console.log(audi);
+// const tom = new User2("Tom", 20);
+// console.log(tom);
 
+// // // # 클래스 상속 extends
 
-// # 메소드 오버라이딩 method overriding
-// # super 부모 클래스 매서드 사용할 수 있음.
-class Bmw extends Car {
-  park() {
-    console.log("stop");
-  }
-}
-console.log(audi);
+// class Car {
+//   constructor(color) {
+//     this.color = color;
+//     this.wheels = 4;
+//   }
+//   drive() {
+//     console.log("dirve..");
+//   }
+//   stop() {
+//     console.log("Stop");
+//   }
+// }
+
+// // class Bmw extends Car {
+// //   park() {
+// //     console.log("Park");
+// //   }
+// // }
+
+// const audi = new Bmw("blue");
+// console.log(audi);
+
+// // # 메소드 오버라이딩 method overriding
+// // # super 부모 클래스 매서드 사용할 수 있음.
+// class Bmw extends Car {
+//   park() {
+//     console.log("stop");
+//   }
+// }
+// console.log(audi);
+
+// // # Promise
+// const pr = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("OK");
+//     console.log(resolve);
+//   }, 3000);
+// });
+
+// pr.then(function (result) {
+//   // 성공시 실행
+//   console.log(`${result} gogo`);
+// })
+//   .catch(function (err) {
+//     // 실패시 실행
+//     console.log("try it again");
+//   })
+//   .finally(function () {
+//     // 마지막에 무조건 실행
+//     console.log("final");
+//   });
+
+const pr = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("OK");
+  }, 1000);
+});
+
+pr.then((result) => {
+  console.log(result);
+})
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    console.log("finally");
+  });
+
+  
