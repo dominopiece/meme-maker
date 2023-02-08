@@ -527,4 +527,49 @@ ctx.lineWidth = 5;
 //   });
 // });
 
+// # promise test
+const f1 = () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("1번 주문 완료");
+    }, 1000);
+  });
+};
 
+const f2 = (message) => {
+  console.log(message);
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("2번 주문 완료");
+    }, 2000);
+  });
+};
+
+const f3 = (message) => {
+  console.log(message);
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("3번 주문 완료");
+    }, 3000);
+  });
+};
+
+// console.log("시작");
+// f1()
+//   .then((res) => f2(res))
+//   .then((res) => f3(res))
+//   .then((res) => console.log(res))
+//   .catch(console.log)
+//   .finally(() => {
+//     console.log("끝")
+//   })
+
+// Promise.all
+// Promise.all 은 시간도 절약 됨. 한꺼번에 실행되기 떄문.
+// 하나라도 실패하면 실행이 안됨.
+// 반면 위의 경우 실패한 부분에서 멈춤. 
+Promise.all([f1(), f2(), f3()]).then((res) => {
+  console.log(res)
+})
+
+// Promise.race의 경우 제일 먼저 실행되는 것만 실행.
