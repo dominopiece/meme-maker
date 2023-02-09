@@ -1,3 +1,5 @@
+const destroyBtn = document.getElementById("destroy-btn");
+const eraserBtn = document.getElementById("eraser-btn");
 const modeBtn = document.getElementById("mode-btn");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
@@ -7,11 +9,13 @@ const lineWidth = document.getElementById("line-width");
 const color = document.getElementById("color");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-canvas.width = 800;
-canvas.height = 800;
-ctx.lineWidth = lineWidth.value;
 
-// # Mouse Painting
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
+
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+ctx.lineWidth = lineWidth.value;
 
 // 값이 변하는 변수
 let isPainting = false;
@@ -70,9 +74,20 @@ const onModeClick = () => {
 };
 
 const onCanvasClick = () => {
-  if(isFilling) {
-    ctx.fillRect(0, 0, 800, 800)
+  if (isFilling) {
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
+};
+
+const onDestroyClick = () => {
+  ctx.fillStyle = "White";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+};
+
+const onEraserClick = () => {
+  ctx.strokeStyle = "White";
+  isFilling = false;
+  modeBtn.innerText = "Fill";
 };
 
 canvas.addEventListener("mousemove", onMove);
@@ -87,8 +102,12 @@ canvas.addEventListener("click", onCanvasClick);
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
 
-console.log(colorOptions);
+// console.log(colorOptions);
 // forEach는 배열만 가능
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 
 modeBtn.addEventListener("click", onModeClick);
+
+destroyBtn.addEventListener("click", onDestroyClick);
+
+eraserBtn.addEventListener("click", onEraserClick);
