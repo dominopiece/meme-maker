@@ -1,5 +1,9 @@
+const colorOptions = Array.from(
+  document.getElementsByClassName("color-option")
+);
+// const colorOptions = document.getElementsByClassName("color-option")
 const lineWidth = document.getElementById("line-width");
-const color = document.getElementById("color")
+const color = document.getElementById("color");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 800;
@@ -18,7 +22,7 @@ const onMove = (event) => {
     return;
   }
   // 각 선 굵기
-  ctx.beginPath(); 
+  ctx.beginPath();
   ctx.moveTo(event.offsetX, event.offsetY);
 };
 
@@ -39,9 +43,19 @@ const onLineWidthChange = (event) => {
 
 const onColorChange = (event) => {
   //  console.log(event.target.value)
-  ctx.strokeStyle = event.target.value
-  ctx.fillStyle = event.target.value
-}
+  ctx.strokeStyle = event.target.value;
+  ctx.fillStyle = event.target.value;
+};
+
+const onColorClick = (event) => {
+  // dataset DOMStringMap {color: '#8e44ad'}
+  const colorValue = event.target.dataset.color;
+  console.dir(event.target);
+  console.dir(event.target.dataset.color);
+  ctx.strokeStyle = colorValue;
+  ctx.fillStyle = colorValue;
+  color.value = colorValue;
+};
 
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
@@ -53,3 +67,7 @@ document.addEventListener("mouseup", onMouseUp);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
+
+console.log(colorOptions);
+// forEach는 배열만 가능
+colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
