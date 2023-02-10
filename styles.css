@@ -1,7 +1,18 @@
+@import "reset.css";
+
+body {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: gainsboro;
+}
+
 canvas {
     width: 800px;
     height: 800px;
     border: 5px solid black;
+    /* background-color: white; */
 }
 
 body {
