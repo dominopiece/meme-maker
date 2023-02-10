@@ -1,3 +1,4 @@
+const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
@@ -17,6 +18,7 @@ const CANVAS_HEIGHT = 800;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
 
 // 값이 변하는 변수
 let isPainting = false;
@@ -103,8 +105,23 @@ const onFileChange = (event) => {
   image.onload = function () {
     ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     // 파일 선택 버튼 오른쪽 파일 명 null
-    fileInput.value = null
+    fileInput.value = null;
   };
+};
+
+const onDoubleClick = (event) => {
+  // ctx 현재 상태, 색상, 스타일 저장
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save();
+    // console.log(event.offsetX, event.offsetY);
+    ctx.lineWidth = 1;
+    ctx.font = "32px serif";
+    // ctx.strokeText(text, event.offsetX, event.offsetY);
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    // ctx 수정 완료
+    ctx.restore();
+  }
 };
 
 canvas.addEventListener("mousemove", onMove);
@@ -116,6 +133,7 @@ canvas.addEventListener("mouseleave", onMouseUp);
 // document.addEventListener("mouseup", onMouseUp);
 canvas.addEventListener("click", onCanvasClick);
 // console.log(canvas)
+canvas.addEventListener("dblclick", onDoubleClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
