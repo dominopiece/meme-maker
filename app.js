@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById("save");
 const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
 const destroyBtn = document.getElementById("destroy-btn");
@@ -124,6 +125,16 @@ const onDoubleClick = (event) => {
   }
 };
 
+const onSaveClick = () => {
+  // console.log(canvas.toDataURL())
+  const url = canvas.toDataURL();
+  // <a href="" download
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "download.jpg";
+  a.click();
+};
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup", onMouseUp);
@@ -137,15 +148,11 @@ canvas.addEventListener("dblclick", onDoubleClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
-
 // console.log(colorOptions);
 // forEach는 배열만 가능
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
-
 modeBtn.addEventListener("click", onModeClick);
-
 destroyBtn.addEventListener("click", onDestroyClick);
-
 eraserBtn.addEventListener("click", onEraserClick);
-
 fileInput.addEventListener("change", onFileChange);
+saveBtn.addEventListener("click", onSaveClick);
